@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, Types } from "mongoose";
 
 export const historySchema = Schema({
-    diagnoses: {
+    diagnoses: { //embebido
         date: {
             type: Date,
             required: true
