@@ -10,7 +10,7 @@ export const historySchema = Schema({
             type: String,
             required: true
         }, 
-        doctor: {
+        doctor: { //dos referecial
             type: mongoose.Schema.Types.ObjectId,
             ref: 'DoctorModel',
             required: true

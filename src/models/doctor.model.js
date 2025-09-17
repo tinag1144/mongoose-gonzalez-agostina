@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import mongoose, { model, Schema, Types } from "mongoose";
 
 export const doctorSchema = new Schema({
     name: {
@@ -13,6 +13,10 @@ export const doctorSchema = new Schema({
         type: String,
         required: true
     }, 
+    patients: [{ //doc referencial 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'PatientSchema'
+    }]
 }, {
     versionKey: false
 });

@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import mongoose, { model, Schema, Types } from "mongoose";
 
 export const patientSchema = new Schema({
     name: {
@@ -15,7 +15,7 @@ export const patientSchema = new Schema({
     }, 
     dni: {
         type: Number, 
-        required: true,
+        required: true, 
         unique: true
     },
     email: {
@@ -23,6 +23,11 @@ export const patientSchema = new Schema({
         required: true,
         unique: true    
     }, 
+    doctor: [{ //doc referencial 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'DoctorSchema',
+        required: true
+    }],
     obraSocial: { //documento embebido 
         nombre: { type: String },
         numeroAfiliado: { type: String }
