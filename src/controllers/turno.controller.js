@@ -1,4 +1,4 @@
-import { TurnoModel, turnoSchema } from "../models/turno.model.js";
+import { TurnoModel } from "../models/turno.model.js";
 
 // CREATE
 export const createTurno = async (req, res) => {
@@ -14,7 +14,7 @@ export const createTurno = async (req, res) => {
 // READ
 export const getTurnos = async (req, res) => {
   try {
-    const turnos = await TurnoModel.find();
+    const turnos = await TurnoModel.find().populate('patient').populate('doctor');
     res.json(turnos);
   } catch (err) {
     res.status(500).json({ error: err.message });

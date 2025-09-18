@@ -14,7 +14,7 @@ export const createHistory = async (req, res) => {
 // READ
 export const getHistories = async (req, res) => {
   try {
-    const histories = await HistoryModel.find();
+    const histories = await HistoryModel.find().populate('diagnoses.doctor');
     res.json(histories);
   } catch (err) {
     res.status(500).json({ error: err.message });

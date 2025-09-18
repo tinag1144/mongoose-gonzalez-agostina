@@ -1,4 +1,5 @@
 import { PatientModel } from "../models/patient.model.js";
+import { TurnoModel } from "../models/turno.model.js";
 
 // CREATE
 export const createPatient = async (req, res) => {
@@ -14,7 +15,7 @@ export const createPatient = async (req, res) => {
 // READ
 export const getPatients = async (req, res) => {
   try {
-    const pacientes = await PatientModel.find();
+    const pacientes = await PatientModel.find( {deleted: false } ).populate('doctor');
     res.json(pacientes);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -40,20 +41,14 @@ export const deletePatient = async (req, res) => {
     const { id } = req.params;
     
   try {
-    // Encuentra y elimina el paciente 
-    const deletedPatient = await PatientModel.findByIdAndDelete(id);
+    // Encuentra y "elimina" el paciente 
+    await PatientModel.findByIdAndUpdate(id, {deleted: true} ); //eliminacion logica
+    await TurnoModel.deleteMany( { patient: id} ); //elimincacion en cascada
 
-    if (!deletedPatient) {
-      return res.status(404).json({
-        ok: false,
-        msg: "Paciente no encontrado"
-      });
-    }
-
+   
     res.status(200).json({
       ok: true,
-      msg: "Paciente eliminado correctamente",
-      data: deletedPatient
+      msg: "Paciente y sus turnos eliminados correctamente"
     });
   } catch (error) {
     console.error(error);
