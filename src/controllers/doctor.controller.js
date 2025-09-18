@@ -1,4 +1,5 @@
 import { DoctorModel } from "../models/doctor.model.js";
+import { PatientModel } from "../models/patient.model.js";
 import { TurnoModel } from "../models/turno.model.js";
 
 // CREATE
@@ -28,8 +29,7 @@ export const getDoctorById = async (req, res) => {
     const { id } = req.params; 
     const doctor = await DoctorModel.findById(id)
     .populate({
-      path: "patients",
-      populate: { path: "patient" } //"baja" al turno y después trae al paciente 
+      path: "patients" //"baja" al turno y después trae al paciente 
     })
     if (!doctor) {
       return res.status(404).json({ msg: "Doctor no encontrado"});
@@ -73,3 +73,33 @@ export const deleteDoctors = async (req, res) => {
     });
   }
 };
+
+//Vincular doctor a paciente 
+// export const addDoctorToPatient = async (req, res) => {
+//   try {
+//     const { doctorId, patientId } = req.body;
+
+//     // primero validar que existan
+//     const doctor = await DoctorModel.findById(doctorId);
+//     const patient = await PatientModel.findById(patientId);
+//     // console.log(doctor, patient); 
+//     if (!doctor || !patient) {
+//       return res.status(404).json({ error: "Doctor o Paciente no encontrado" });
+//     }
+
+//     // vinculación usando $addtoset
+//     await DoctorModel.updateOne(
+//       { _id: doctorId },
+//       { $addToSet: { patients: patientId } }
+//     );
+
+//     await PatientModel.updateOne(
+//       { _id: patientId },
+//       { $addToSet: { doctors: doctorId } }
+//     );
+
+//     res.status(200).json({ message: "Vínculo hecho" });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// };

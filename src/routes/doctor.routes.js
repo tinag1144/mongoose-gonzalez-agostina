@@ -4,7 +4,8 @@ import {
     getDoctors,
     updateDoctors,
     deleteDoctors,
-    getDoctorById
+    getDoctorById,
+    // addDoctorToPatient
 } from "../controllers/doctor.controller.js"
 import { createDoctorValidator } from "../middlewares/validations/doctor.validations.js";
 import { validator } from "../middlewares/validator.js"
@@ -15,3 +16,4 @@ doctorRoutes.get("/doctors", getDoctors)
 doctorRoutes.get("/doctor/:id", getDoctorById)
 doctorRoutes.put("/doctor/:id", updateDoctors)
 doctorRoutes.delete("/doctor/:id", deleteDoctors)
+// doctorRoutes.post("/assign", addDoctorToPatient);

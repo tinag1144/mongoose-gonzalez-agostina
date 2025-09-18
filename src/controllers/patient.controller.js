@@ -15,7 +15,7 @@ export const createPatient = async (req, res) => {
 // READ
 export const getPatients = async (req, res) => {
   try {
-    const pacientes = await PatientModel.find( {deleted: false } ).populate('doctor');
+    const pacientes = await PatientModel.find();
     res.json(pacientes);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -42,7 +42,10 @@ export const deletePatient = async (req, res) => {
     
   try {
     // Encuentra y "elimina" el paciente 
-    await PatientModel.findByIdAndUpdate(id, {deleted: true} ); //eliminacion logica
+    await PatientModel.findByIdAndUpdate(id, 
+      {deletedAt: new Date()},
+      { new: true} 
+    ); //eliminacion logica
     await TurnoModel.deleteMany( { patient: id} ); //elimincacion en cascada
 
    

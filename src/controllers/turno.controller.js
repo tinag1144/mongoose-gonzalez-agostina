@@ -41,6 +41,7 @@ export const deleteTurno = async (req, res) => {
   try {
     const deleteTurno = await TurnoModel.findByIdAndDelete(id);
 
+    // console.log(deleteTurno);
     if (!deleteTurno) {
       return res.status(404).json({
         ok: false,
@@ -51,7 +52,7 @@ export const deleteTurno = async (req, res) => {
     res.status(200).json({
       ok: true,
       msg: "Turno eliminado correctamente",
-      data: deletedPatient
+      data: deleteTurno
     });
   } catch (error) {
     console.error(error);

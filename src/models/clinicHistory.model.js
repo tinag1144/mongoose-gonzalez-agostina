@@ -12,9 +12,14 @@ export const historySchema = Schema({
         }, 
         doctor: { //dos referecial
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'DoctorModel',
+            ref: 'Doctor',
             required: true
         }
+    },
+    patient:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Patient',
+        required: true
     },
     allergies: {
         type: String

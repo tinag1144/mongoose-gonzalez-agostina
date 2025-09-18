@@ -11,12 +11,12 @@ export const turnoSchema = Schema({
     },
     patient: { //doc referencial
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'PatientModel',
+        ref: 'Patient',
         required: true
     },
     doctor:{ //doc referencial
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'DoctorModel',
+        ref: 'Doctor',
         required: true
     },
     room: { //doc embebido 

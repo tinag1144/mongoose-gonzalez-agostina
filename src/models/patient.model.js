@@ -31,7 +31,11 @@ export const patientSchema = new Schema({
     obraSocial: { //documento embebido 
         nombre: { type: String },
         numeroAfiliado: { type: String }
-  },
+    },
+    deletedAt: {
+        type: Date, 
+        default: null
+    }
 }, {
     versionKey: false
 });

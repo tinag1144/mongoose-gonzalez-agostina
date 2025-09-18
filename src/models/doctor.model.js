@@ -1,4 +1,4 @@
-import mongoose, { model, Schema, Types } from "mongoose";
+import { model, Schema } from "mongoose";
 
 export const doctorSchema = new Schema({
     name: {
@@ -12,11 +12,7 @@ export const doctorSchema = new Schema({
     especialidad: {
         type: String,
         required: true
-    }, 
-    patients: [{ //doc referencial 
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'PatientSchema'
-    }]
+    },
 
 }, {
     toJSON: { virtuals: true }, //esto es para ue los "viartuales" aparezcan al convertir a JSON
