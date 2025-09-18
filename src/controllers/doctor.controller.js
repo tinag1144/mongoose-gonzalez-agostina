@@ -22,6 +22,23 @@ export const getDoctors = async (req, res) => {
   }
 };
 
+//READ BY ID
+export const getDoctorById = async (req, res) => {
+  try{ 
+    const { id } = req.params; 
+    const doctor = await DoctorModel.findById(id)
+    .populate({
+      path: "patients",
+      populate: { path: "patient" } //"baja" al turno y después trae al paciente 
+    })
+    if (!doctor) {
+      return res.status(404).json({ msg: "Doctor no encontrado"});
+    }
+    res.json(doctor);
+  } catch (error) {
+    res.status(500).json({ msg: "Error en el servidor", error })
+  }
+};
 // UPDATE
 export const updateDoctors = async (req, res) => {
   try {

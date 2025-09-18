@@ -32,3 +32,18 @@ Referencial porque si se hace de forma embebida, y en caso de que los datos del 
 
 
 _INVESTIGACIÓN:_
+
+*POPULATE*
+El metodo populate en Mongoose, sirve para traer documentos completos de otra colección a partir de un ObjectId.
+Ahora, si una colección no tiene referencias directas, igual se puede hacer algo parecido con dos enfoques: 
+
+_Virtual Populate:_
+-Se definen "referencias virtuales", en el schema usando ref + localField + foreignField.
+-Esto no guarda físicamete la relacion de la coleccion pero deja consultarla como si existiese. 
+
+*ELIMINACIONES:*
+_LÓGICA:_
+No se borra el documento de la base de datos, sino que se marca con un flag (isDeleted: true, active: true)
+
+_CASCADA:_
+Cuando se borra un documento, también se borran o actualizan los q dependen de él
